@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { NhostClient, NhostProvider } from '@nhost/react'
+import ProtectedRoute from './components/ProtectedRoute'
 
 import Layout from './components/Layout';
 import SignUp from './pages/SignUp';
@@ -20,7 +21,11 @@ function App() {
         <Routes>
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={
+           <ProtectedRoute>
+           <Layout />
+           </ProtectedRoute>
+           }>
             <Route index element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
           </Route>
